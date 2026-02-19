@@ -1,0 +1,13 @@
+<h2>Reservation List</h2>
+
+<ul>
+    @for (reservation of reservations; track reservation) {
+    <li>
+        Guest: {{ reservation.guestName }} <br>
+        Email: {{ reservation.guestEmail }} <br>
+        Room Number: {{ reservation.roomNumber }} <br>
+        Check-In: {{ reservation.checkInDate }} <br>
+        Check-Out: {{ reservation.checkOutDate }} <br>
+    </li>
+    }
+</ul>
