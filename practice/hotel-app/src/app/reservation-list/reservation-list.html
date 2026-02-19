@@ -1,13 +1,21 @@
-<h2>Reservation List</h2>
+<app-home />
 
-<ul>
-    @for (reservation of reservations; track reservation) {
-    <li>
-        Guest: {{ reservation.guestName }} <br>
-        Email: {{ reservation.guestEmail }} <br>
-        Room Number: {{ reservation.roomNumber }} <br>
-        Check-In: {{ reservation.checkInDate }} <br>
-        Check-Out: {{ reservation.checkOutDate }} <br>
-    </li>
-    }
-</ul>
+<h2>Reservation List</h2>
+@if (reservations.length){
+    <ul>
+        @for (reservation of reservations; track reservation.id) {
+        <li>
+            Guest: {{ reservation.guestName }} <br>
+            Email: {{ reservation.guestEmail }} <br>
+            Room Number: {{ reservation.roomNumber }} <br>
+            Check-In: {{ reservation.checkInDate }} <br>
+            Check-Out: {{ reservation.checkOutDate }} <br>
+            <button (click)="deleteReservation(reservation.id)">Delete</button>
+            <button [routerLink]="['/edit', reservation.id]">Edit</button>
+        </li>
+        }
+    </ul>
+}
+@else {
+    <p>No reservation available.</p>
+}
