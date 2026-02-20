@@ -1,50 +1,61 @@
 <app-home />
 
+<hr>
+<h2 class="mt-5 mb-3">Create a New Reservation</h2>
+
 <form [formGroup]="reservationForm" (ngSubmit)="onSumbit()">
-    <div>
-        <label>Check-in Date: </label>
-        <input type="date" formControlName="checkInDate">
-        @if (reservationForm.get('checkInDate')?.invalid && reservationForm.get('checkInDate')?.touched) {
-        <div>
-            Check-in Date is required
+
+    <div class="row mb-3">
+        <div class="col">
+            <label class="form-label">Check-in Date: </label>
+            <input class="form-control" type="date" formControlName="checkInDate">
+            @if (reservationForm.get('checkInDate')?.invalid && reservationForm.get('checkInDate')?.touched) {
+            <small class="text-danger">
+                Check-in Date is required
+            </small>
+            }
         </div>
-        }
+        <div class="col">
+            <label class="form-label">Check-out Date: </label>
+            <input class="form-control" type="date" formControlName="checkOutDate">
+            @if (reservationForm.get('checkOutDate')?.invalid && reservationForm.get('checkOutDate')?.touched) {
+            <small class="text-danger">
+                Check-Out Date is required
+            </small>
+            }
+        </div>        
     </div>
-    <div>
-        <label>Check-out Date: </label>
-        <input type="date" formControlName="checkOutDate">
-        @if (reservationForm.get('checkOutDate')?.invalid && reservationForm.get('checkOutDate')?.touched) {
-        <div>
-            Check-Out Date is required
-        </div>
-        }
-    </div>
-    <div>
-        <label>Guest Name: </label>
-        <input type="text" formControlName="guestName">
+
+    <div class="mb-3">
+        <label class="form-label">Guest Name: </label>
+        <input class="form-control" type="text" formControlName="guestName">
         @if (reservationForm.get('guestName')?.invalid && reservationForm.get('guestName')?.touched) {
-        <div>
+        <small class="text-danger">
             Guest Name is required
-        </div>
+        </small>
         }
     </div>
-    <div>
-        <label>Email: </label>
-        <input type="email" formControlName="guestEmail">
+
+    <div class="mb-3">
+        <label class="form-label">Email: </label>
+        <input class="form-control" type="email" formControlName="guestEmail">
         @if (reservationForm.get('guestEmail')?.invalid && reservationForm.get('guestEmail')?.touched) {
-        <div>
+        <small class="text-danger">
             Guest Email is required
-        </div>
+        </small>
         }
     </div>
-    <div>
-        <label>Room Number: </label>
-        <input type="number" formControlName="roomNumber">
+
+    <div class="mb-3">
+        <label class="form-label">Room Number: </label>
+        <input class="form-control" type="number" formControlName="roomNumber">
         @if (reservationForm.get('roomNumber')?.invalid && reservationForm.get('roomNumber')?.touched) {
-        <div>
+        <small class="text-danger">
             Room Number is required
-        </div>
+        </small>
         }
     </div>
-    <button type="submit" [disabled]="reservationForm.invalid">Sumbit</button>
+
+    <button class="btn btn-primary" type="submit" [disabled]="reservationForm.invalid">Sumbit</button>
+
 </form>

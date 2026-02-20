@@ -38,5 +38,4 @@ export class ReservationService {
     this.reservations[index] = updatedReservation;
     localStorage.setItem("reservations", JSON.stringify(this.reservations))
   }
-
 }
