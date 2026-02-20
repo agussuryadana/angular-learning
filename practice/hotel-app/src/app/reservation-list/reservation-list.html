@@ -3,6 +3,8 @@
 <hr>
 <h2 class="mt-5 mb-3">Reservation List</h2>
 
+@if (reservations.length){
+
 <table class="table table-striped">
     <thead>
         <tr>
@@ -15,7 +17,7 @@
         </tr>
     </thead>
     <tbody>
-        @if (reservations.length){
+
             @for (reservation of reservations; track reservation.id) {
                 <tr>
                     <td>{{ reservation.guestName }}</td>
@@ -29,13 +31,14 @@
                     </td>
                 </tr>
             }
-        }
-        @else {
-            <p>No reservation available.</p>
-        }
+        
+        
     </tbody>
 </table>
 
-
+}
+@else {
+            <p>No reservation available.</p>
+        }
     
 

@@ -1,41 +1,35 @@
 import { Injectable } from '@angular/core';
 import { ReservationModel } from '../models/reservation.model';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ReservationService {
+
+  private apiURL = "http://localhost:3001"
   private reservations: ReservationModel[] = [];
 
-  constructor(){
-     let savedReservations = localStorage.getItem("reservations");
-     this.reservations = savedReservations? JSON.parse(savedReservations) : [];
+  constructor (private http: HttpClient){}
+
+  getReservations(): Observable<ReservationModel[]>{
+    return this.http.get<ReservationModel[]>(this.apiURL + "/reservations")
   }
 
-  getReservations(): ReservationModel[]{
-    return this.reservations;
+  getReservation(id: string): Observable<ReservationModel>{
+    return this.http.get<ReservationModel>(this.apiURL + "/reservation/"+id)
   }
 
-  getReservation(id: string): ReservationModel | undefined{
-    return this.reservations.find(res => res.id === id);
+  addReservation(reservation: ReservationModel): Observable<void> {
+    return this.http.post<void>(this.apiURL + "/reservation/", reservation)
   }
 
-  addReservation(reservation: ReservationModel): void {
-    reservation.id = Date.now().toString()
-    
-    this.reservations.push(reservation);
-    localStorage.setItem("reservations", JSON.stringify(this.reservations))
+  deleteReservation(id: string): Observable<void> {
+    return this.http.delete<void>(this.apiURL + "/reservation/"+id)
   }
 
-  deleteReservation(id: string): void {
-    let index = this.reservations.findIndex(res => res.id === id);
-    this.reservations.splice(index,1)
-    localStorage.setItem("reservations", JSON.stringify(this.reservations))
-  }
-
-  updateReservation(id: string, updatedReservation: ReservationModel): void {
-    let index = this.reservations.findIndex(res => res.id === id);
-    this.reservations[index] = updatedReservation;
-    localStorage.setItem("reservations", JSON.stringify(this.reservations))
+  updateReservation(id: string, updatedReservation: ReservationModel): Observable<void> {
+    return this.http.put<void>(this.apiURL + "/reservation/" + id, updatedReservation)
   }
 }
