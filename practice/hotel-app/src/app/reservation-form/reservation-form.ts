@@ -60,7 +60,7 @@ export class ReservationForm implements OnInit{
     } else {
       // new
       this.reservationService.addReservation(reservation).subscribe(() => {
-        console.log("Update request processed")
+        console.log("Create request processed")
       })
     }
 

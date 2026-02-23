@@ -9,27 +9,26 @@ import { Observable } from 'rxjs';
 export class ReservationService {
 
   private apiURL = "http://localhost:3001"
-  private reservations: ReservationModel[] = [];
 
   constructor (private http: HttpClient){}
 
   getReservations(): Observable<ReservationModel[]>{
-    return this.http.get<ReservationModel[]>(this.apiURL + "/reservations")
+    return this.http.get<ReservationModel[]>(this.apiURL + "/reservations");
   }
 
   getReservation(id: string): Observable<ReservationModel>{
-    return this.http.get<ReservationModel>(this.apiURL + "/reservation/"+id)
+    return this.http.get<ReservationModel>(this.apiURL + "/reservations/"+id);
   }
 
   addReservation(reservation: ReservationModel): Observable<void> {
-    return this.http.post<void>(this.apiURL + "/reservation/", reservation)
+    return this.http.post<void>(this.apiURL + "/reservations/", reservation);
   }
 
   deleteReservation(id: string): Observable<void> {
-    return this.http.delete<void>(this.apiURL + "/reservation/"+id)
+    return this.http.delete<void>(this.apiURL + "/reservations/"+id);
   }
 
   updateReservation(id: string, updatedReservation: ReservationModel): Observable<void> {
-    return this.http.put<void>(this.apiURL + "/reservation/" + id, updatedReservation)
+    return this.http.put<void>(this.apiURL + "/reservations/" + id, updatedReservation);
   }
 }

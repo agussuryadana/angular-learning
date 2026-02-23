@@ -4,25 +4,25 @@ import { ReservationModel } from '../models/reservation.model';
 import { RouterLink } from "@angular/router";
 import { RouterModule } from '@angular/router';
 import { Home } from '../home/home';
+import { Observable } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   standalone: true,
   selector: 'app-reservation-list',
-  imports: [Home, RouterLink, RouterModule],
+  imports: [AsyncPipe,Home, RouterLink, RouterModule],
   templateUrl: './reservation-list.html',
   styleUrl: './reservation-list.css',
 })
 
 export class ReservationList implements OnInit {
-  reservations: ReservationModel[] = [];
 
   constructor(private reservationService: ReservationService) {}
 
+  reservations$!: Observable<ReservationModel[]>;
+
   ngOnInit(): void {
-    this.reservationService.getReservations().subscribe(reservations => {
-      this.reservations = reservations
-      console.log("COMPONENT DATA:", reservations);
-    });
+    this.reservations$ = this.reservationService.getReservations();
   }
 
   deleteReservation(id: string){
