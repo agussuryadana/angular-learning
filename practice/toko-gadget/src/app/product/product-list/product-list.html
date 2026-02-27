@@ -1,0 +1,13 @@
+<div class="container">
+    @for (product of products; track product.id) {
+        <mat-card class="product-card" appearance="outlined">
+        <img mat-card-image src="https://material.angular.dev/assets/img/examples/shiba2.jpg">
+        <mat-card-content>
+            <mat-card-title>{{ product.name }}</mat-card-title>
+            <mat-card-subtitle>
+          {{ product.price | currency:'IDR' }}
+            </mat-card-subtitle>
+        </mat-card-content>
+    </mat-card>
+        }
+    </div>

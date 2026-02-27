@@ -1,0 +1,26 @@
+.title {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 150px);
+    gap: 20px;
+    padding: 50px;
+    justify-content: center;
+}
+
+.product-card {
+    max-width: 150px;
+}
+
+mat-card:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+mat-card {
+    transition: transform .2s;
+}
