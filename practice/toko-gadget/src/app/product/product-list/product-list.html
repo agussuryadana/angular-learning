@@ -1,5 +1,5 @@
 <div class="container">
-    @for (product of products; track product.id) {
+    @for (product of products$ | async; track product.id) {
         <mat-card class="product-card" appearance="outlined">
         <img mat-card-image src="https://material.angular.dev/assets/img/examples/shiba2.jpg">
         <mat-card-content>

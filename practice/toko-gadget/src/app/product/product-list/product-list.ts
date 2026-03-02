@@ -1,27 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
 import { Product } from '../../models/product';
-import {MatCardModule} from '@angular/material/card';
-import { CurrencyPipe } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { AsyncPipe, CurrencyPipe, CommonModule } from '@angular/common';
+import { Observable } from 'rxjs';
 
 
 @Component({
   selector: 'app-product-list',
-  imports: [MatCardModule, CurrencyPipe],
+  imports: [MatCardModule, AsyncPipe, CurrencyPipe, CommonModule],
   templateUrl: './product-list.html',
   styleUrl: './product-list.css',
 })
+
 export class ProductList implements OnInit {
 
-  // use a lowercase name for the array and avoid conflicting with the type
-  products: Product[] = [];
+  products$!: Observable<Product[]>;
 
-  constructor(private ProductService: ProductService){}
+  constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
-    this.ProductService.getProducts().subscribe(data => {
-      this.products = data;
-    })
+    this.products$ = this.productService.getProducts();
   }
-
 }
