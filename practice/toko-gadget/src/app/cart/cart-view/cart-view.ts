@@ -7,7 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Observable } from 'rxjs';
 import { AsyncPipe, CurrencyPipe, CommonModule } from '@angular/common';
-import { map } from 'rxjs';
+import { map, switchMap, take } from 'rxjs';
 
 @Component({
   selector: 'app-cart-view',
@@ -27,7 +27,18 @@ export class CartView implements OnInit{
 
     this.total$ = this.cartItems$.pipe(
     map(items => items.reduce((t, i) => t + i.price, 0))
-  );
+    );
   }
 
-}
+  ClearCart(): void {
+    this.cartService.clearCart().subscribe();
+  }
+
+checkout(): void {
+  this.cartItems$
+    .pipe(
+      take(1),
+      switchMap(items => this.cartService.checkout(items))
+    )
+    .subscribe();
+}}

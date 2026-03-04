@@ -15,10 +15,10 @@
                 <span class="price" matListItemLine>{{ total$ | async | currency:'IDR' }}</span>
             </mat-list-item>
             <mat-list-item  class="text-right">
-                <button mat-flat-button>Clear</button>
+                <button mat-flat-button (click)="ClearCart()">Clear</button>
             </mat-list-item>
             <mat-list-item class="text-right">
-                <button mat-raised-button color="accent">Checkout</button>
+                <button mat-raised-button color="accent" (click)="checkout()">Checkout</button>
             </mat-list-item>
         </mat-list>
     </mat-card>
