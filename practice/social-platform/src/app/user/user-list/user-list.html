@@ -1,0 +1,6 @@
+@for (user of users; track user.id){
+    <div>{{ user.name }}</div>
+}
+
+<button (click)="refreshUsers()">Refresh</button>
+
