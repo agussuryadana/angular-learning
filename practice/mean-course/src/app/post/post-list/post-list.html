@@ -1,0 +1,12 @@
+<mat-accordion multi="true">
+    @for (post of posts; track post.title){
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            {{ post.title }}
+        </mat-expansion-panel-header>
+            {{ post.content }}
+    </mat-expansion-panel>
+    } @empty {
+        <p class="info-text mat-body-1">No posts added yet!</p>
+    }
+</mat-accordion>
