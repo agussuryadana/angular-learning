@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Book } from '../models/book';
+import { BookInterface } from '../models/book.interface';
 import { AddBook,RemoveBook } from '../books/book.actions';
 import { AppState } from '../app.state';
 import { AsyncPipe } from '@angular/common';
@@ -14,7 +14,7 @@ import { AsyncPipe } from '@angular/common';
 })
 export class BookList {
 
-  books$: Observable<Book[]>;
+  books$: Observable<BookInterface[]>;
 
   constructor(private store: Store<AppState>){
     this.books$ = store.pipe(select('book'));

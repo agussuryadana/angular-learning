@@ -1,5 +1,5 @@
-import { Book } from "./models/book";
+import { BookInterface } from "./models/book.interface";
 
 export interface AppState {
-    readonly book: Book[]
+    readonly book: BookInterface[]
 }

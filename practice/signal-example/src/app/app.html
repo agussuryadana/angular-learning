@@ -1,3 +1,18 @@
-<div>{{ label }}</div>
-<button (click)="toggleDarkMode()">Toggle</button>
+<div>
+    <input type="text" (input)="changeFilter($event)"/>
+</div>
+<br>
+<table>
+    @for(product of filteredProducts(); track product.id){
+    <tr>
+        <td>{{ product.id }}</td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.price }}</td>
+    </tr>
+    }
+
+</table>
+
+
+
 <router-outlet />
