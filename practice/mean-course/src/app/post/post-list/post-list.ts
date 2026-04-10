@@ -1,6 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { Post } from '../post.model';
+import { PostService } from '../post.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-post-list',
@@ -8,12 +10,22 @@ import { Post } from '../post.model';
   templateUrl: './post-list.html',
   styleUrl: './post-list.css',
 })
-export class PostList {
-  // posts = [
-  //   {title: "First Post", content: "this is First Post's"},
-  //   {title: "Second Post", content: "this is Second Post's"},
-  //   {title: "Third Post", content: "this is Third Post's"}
-  // ];
+export class PostList implements OnInit, OnDestroy {
 
-  @Input() posts: Post[] = [];
+  posts: Post[] = [];
+  private postSubs!: Subscription;
+
+  constructor(private postService: PostService) {}
+  
+  ngOnInit(): void {
+    this.posts = this.postService.getPosts();
+    this.postSubs = this.postService.getPostUpdateListener()
+      .subscribe((posts: Post[]) =>  {
+        this.posts = posts; 
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.postSubs.unsubscribe();
+  }
 }

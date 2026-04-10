@@ -1,10 +1,16 @@
 <mat-card>
-    <form (submit)="onAddPost()">
+    <form (submit)="onAddPost(postForm)" #postForm="ngForm">
         <mat-form-field>
-            <input matInput type="text" name="title" ngModel>
+            <input matInput type="text" name="title" ngModel required #title="ngModel">
+                @if (title.invalid) {
+                    <mat-error>please input title first</mat-error>
+                }
         </mat-form-field>
         <mat-form-field>
-            <textarea matInput rows="4" name="content" ngModel></textarea>
+            <textarea matInput rows="4" name="content" ngModel required #content="ngModel"></textarea>
+                @if (content.invalid) {
+                    <mat-error>please input content first</mat-error>
+                }
         </mat-form-field>
         <div class="actions">
             <button matButton="filled" type="submit">save
